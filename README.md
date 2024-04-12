@@ -34,3 +34,18 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Notes
+
+- Wrap entire account info with label to make the whole block clickable
+- Use deprecated name attribute on radio inputs to allow labels pointing to each option but grouping each option into one input group
+- Smart price input field
+  - Currency symbol needs to be visible
+  - Shouldn't allow any characters except digits and one period
+  - Shouldn't allow more than two decimal places
+  - Should show two decimal places and at least one dollar digit no matter what the input
+  - Should be empty for any input equal to 0
+- Prorating logic
+  - Largest remainder method to avoid rounding errors and ensure the sum of payments is equal to the total payment
+  - with Math.round: 40000.33 -> 27578.52, 9100.62, 3321.2
+  - Thus requires Math.floor, even though it's not always exactly accurate
