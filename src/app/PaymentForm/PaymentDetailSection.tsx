@@ -24,6 +24,8 @@ const PaymentDetailSection: FC<PaymentDetailSectionProps> = ({
           value={totalPayment}
           setValue={setTotalPayment}
           errors={errors}
+          disabled={false}
+          alignment="left"
           errorNames={["noTotalPayment", "totalPaymentOverBalance"]}
           handleChange={(e) => {
             setErrors({
@@ -38,16 +40,16 @@ const PaymentDetailSection: FC<PaymentDetailSectionProps> = ({
               accountcPaymentOverBalance: false,
             });
             const newPayment =
-              e.target.value === "$" ? 0 : e.target.value.replace("$", "");
+              e.target.value === "$" ? "0" : e.target.value.replace("$", "");
             setTotalPayment(newPayment);
             if (+newPayment === 0 || isNaN(+newPayment)) {
-              setAccounts((prev) => prev.map((a) => ({ ...a, payment: 0 })));
+              setAccounts((prev) => prev.map((a) => ({ ...a, payment: "0" })));
             }
             if (
-              newPayment > 0 &&
+              +newPayment > 0 &&
               accounts.filter((a) => a.selected).length > 0
             ) {
-              setAccounts((prev) => calculateProRate(prev, newPayment));
+              setAccounts((prev) => calculateProRate(prev, +newPayment));
             }
           }}
         />

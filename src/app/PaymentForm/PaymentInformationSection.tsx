@@ -24,7 +24,7 @@ const PaymentInformationSection: FC<PaymentInformationSectionProps> = ({
               : "border h-10 px-3"
           }
           placeholder="Account Number"
-          onWheel={(e) => e.target.blur()}
+          onWheel={(e) => (e.target as HTMLInputElement).blur()}
           value={paymentInformation.accountNumber}
           onChange={(e) => {
             setErrors({
@@ -57,7 +57,7 @@ const PaymentInformationSection: FC<PaymentInformationSectionProps> = ({
           }
           placeholder="Account Number"
           value={paymentInformation.confirmationAccountNumber}
-          onWheel={(e) => e.target.blur()}
+          onWheel={(e) => (e.target as HTMLInputElement).blur()}
           onChange={(e) => {
             setErrors({
               ...errors,
@@ -95,7 +95,7 @@ const PaymentInformationSection: FC<PaymentInformationSectionProps> = ({
           }
           placeholder="Routing Number"
           value={paymentInformation.routingNumber}
-          onWheel={(e) => e.target.blur()}
+          onWheel={(e) => (e.target as HTMLInputElement).blur()}
           onChange={(e) => {
             setErrors({ ...errors, routingNumberIsEmpty: false });
             setPaymentInformation({

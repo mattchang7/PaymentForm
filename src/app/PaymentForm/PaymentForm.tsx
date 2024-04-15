@@ -14,13 +14,13 @@ import { INITIAL_ACCOUNTS } from "../lib";
 
 const PaymentForm: FC<PaymentFormProps> = ({ handleSubmit }): ReactElement => {
   const [accounts, setAccounts] = useState<Account[]>(INITIAL_ACCOUNTS);
-  const [totalPayment, setTotalPayment] = useState<number>(0);
+  const [totalPayment, setTotalPayment] = useState<string>("0");
   const [paymentInformation, setPaymentInformation] =
     useState<PaymentInformation>({
       accountNumber: "",
       confirmationAccountNumber: "",
       routingNumber: "",
-      accountType: "",
+      accountType: undefined,
     });
   const [errors, setErrors] = useState<PaymentFormErrors>({
     accountNumberIsEmpty: false,
@@ -62,7 +62,7 @@ const PaymentForm: FC<PaymentFormProps> = ({ handleSubmit }): ReactElement => {
           newErrors.routingNumberIsEmpty = true;
         }
 
-        if (paymentInformation.accountType === "") {
+        if (paymentInformation.accountType === undefined) {
           newErrors.noAccountType = true;
         }
 
@@ -70,47 +70,47 @@ const PaymentForm: FC<PaymentFormProps> = ({ handleSubmit }): ReactElement => {
           newErrors.noSelectedAccounts = true;
         }
 
-        if (totalPayment === 0) {
+        if (totalPayment === "0") {
           newErrors.noTotalPayment = true;
         } else if (
-          totalPayment * 100 >
+          +totalPayment * 100 >
           accounts.reduce((sum, a) => sum + a.balance, 0)
         ) {
           newErrors.totalPaymentOverBalance = true;
         }
 
         if (
-          accounts.find((a) => a.id === "accounta").selected &&
-          +accounts.find((a) => a.id === "accounta").payment === 0
+          accounts.find((a) => a.id === "accounta")!.selected &&
+          +accounts.find((a) => a.id === "accounta")!.payment === 0
         ) {
           newErrors.noaccountaPayment = true;
         } else if (
-          accounts.find((a) => a.id === "accounta").payment * 100 >
-          accounts.find((a) => a.id === "accounta").balance
+          +accounts.find((a) => a.id === "accounta")!.payment * 100 >
+          accounts.find((a) => a.id === "accounta")!.balance
         ) {
           newErrors.accountaPaymentOverBalance = true;
         }
 
         if (
-          accounts.find((a) => a.id === "accountb").selected &&
-          +accounts.find((a) => a.id === "accountb").payment === 0
+          accounts.find((a) => a.id === "accountb")!.selected &&
+          +accounts.find((a) => a.id === "accountb")!.payment === 0
         ) {
           newErrors.noaccountbPayment = true;
         } else if (
-          accounts.find((a) => a.id === "accountb").payment * 100 >
-          accounts.find((a) => a.id === "accountb").balance
+          +accounts.find((a) => a.id === "accountb")!.payment * 100 >
+          accounts.find((a) => a.id === "accountb")!.balance
         ) {
           newErrors.accountbPaymentOverBalance = true;
         }
 
         if (
-          accounts.find((a) => a.id === "accountc").selected &&
-          +accounts.find((a) => a.id === "accountc").payment === 0
+          accounts.find((a) => a.id === "accountc")!.selected &&
+          +accounts.find((a) => a.id === "accountc")!.payment === 0
         ) {
           newErrors.noaccountcPayment = true;
         } else if (
-          accounts.find((a) => a.id === "accountc").payment * 100 >
-          accounts.find((a) => a.id === "accountc").balance
+          +accounts.find((a) => a.id === "accountc")!.payment * 100 >
+          accounts.find((a) => a.id === "accountc")!.balance
         ) {
           newErrors.accountcPaymentOverBalance = true;
         }

@@ -1,7 +1,10 @@
 "use client";
 
 import { FC, ReactElement, Fragment } from "react";
-import { AccountsListsSectionProps } from "./PaymentForm.types";
+import {
+  AccountsListsSectionProps,
+  PaymentFormErrors,
+} from "./PaymentForm.types";
 import { PriceInput } from "../components/inputs";
 import { format } from "path";
 import { formatter, calculateProRate } from "../lib";
@@ -45,7 +48,7 @@ const AccountsListsSection: FC<AccountsListsSectionProps> = ({
       </div>
       <div className="grid grid-cols-2 w-full gap-4">
         {accounts.map((a) => {
-          const handleBlur = (newValue) => {
+          const handleBlur = (newValue: string) => {
             setAccounts((prev) => {
               return prev.map((p) =>
                 p.id === a.id
@@ -67,6 +70,7 @@ const AccountsListsSection: FC<AccountsListsSectionProps> = ({
                   onChange={(e) => {
                     setErrors({
                       ...errors,
+                      totalPaymentOverBalance: false,
                       noaccountaPayment: false,
                       accountaPaymentOverBalance: false,
                       noaccountbPayment: false,
@@ -80,7 +84,7 @@ const AccountsListsSection: FC<AccountsListsSectionProps> = ({
                         prev.map((p) =>
                           p.id === a.id ? { ...a, selected: !a.selected } : p
                         ),
-                        totalPayment
+                        +totalPayment
                       )
                     );
                   }}
@@ -115,12 +119,13 @@ const AccountsListsSection: FC<AccountsListsSectionProps> = ({
                     handleChange={(e) => {
                       const newPayment =
                         e.target.value === "$"
-                          ? 0
+                          ? "0"
                           : e.target.value.replace("$", "");
                       setErrors({
                         ...errors,
                         ["no" + a.id + "Payment"]: false,
                         [a.id + "PaymentOverBalance"]: false,
+                        totalPaymentOverBalance: false,
                       });
                       setAccounts((prev) => {
                         return prev.map((p) =>
@@ -134,15 +139,19 @@ const AccountsListsSection: FC<AccountsListsSectionProps> = ({
                       });
                       setTotalPayment((prev) =>
                         (
-                          Math.round(100 * (prev - a.payment + +newPayment)) /
+                          Math.round(100 * (+prev - +a.payment + +newPayment)) /
                           100
                         ).toFixed(2)
                       );
                     }}
                   />
-                  {errors["no" + a.id + "Payment"] ? (
+                  {errors[
+                    ("no" + a.id + "Payment") as keyof PaymentFormErrors
+                  ] ? (
                     <p className="text-red-500 text-end">Payment required</p>
-                  ) : errors[a.id + "PaymentOverBalance"] ? (
+                  ) : errors[
+                      (a.id + "PaymentOverBalance") as keyof PaymentFormErrors
+                    ] ? (
                     <p className="text-red-500 text-end">
                       Payment cannot exceed account balance
                     </p>

@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
 
 export interface PaymentInformation {
-  accountNumber: number | undefined;
-  routingNumber: number | undefined;
-  confirmationAccountNumber: number | undefined;
+  accountNumber: string;
+  routingNumber: string;
+  confirmationAccountNumber: string;
   accountType: "Checking" | "Savings" | undefined;
 }
 
@@ -28,12 +28,12 @@ export interface Account {
   id: string;
   name: string;
   balance: number;
-  payment: number | undefined;
+  payment: string;
   selected: boolean;
 }
 
 export interface PaymentFormProps {
-  handleSubmit: () => null;
+  handleSubmit: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface PaymentInformationSectionProps {
@@ -46,8 +46,8 @@ export interface PaymentInformationSectionProps {
 export interface PaymentDetailSectionProps {
   errors: PaymentFormErrors;
   setErrors: Dispatch<SetStateAction<PaymentFormErrors>>;
-  totalPayment: string | undefined;
-  setTotalPayment: Dispatch<SetStateAction<string | undefined>>;
+  totalPayment: string;
+  setTotalPayment: Dispatch<SetStateAction<string>>;
   accounts: Account[];
   setAccounts: Dispatch<SetStateAction<Account[]>>;
 }
@@ -55,20 +55,24 @@ export interface PaymentDetailSectionProps {
 export interface AccountsListsSectionProps {
   errors: PaymentFormErrors;
   setErrors: Dispatch<SetStateAction<PaymentFormErrors>>;
-  totalPayment: string | undefined;
-  setTotalPayment: Dispatch<SetStateAction<string | undefined>>;
+  totalPayment: string;
+  setTotalPayment: Dispatch<SetStateAction<string>>;
   accounts: Account[];
   setAccounts: Dispatch<SetStateAction<Account[]>>;
 }
 
 export interface PriceInputProps {
   value: string;
-  setValue: Dispatch<SetStateAction<string>>;
-  handleChange: (e: Event) => null;
+  setValue: Dispatch<SetStateAction<string>> | ((newValue: string) => void);
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   disabled: boolean;
   alignment: "left" | "right";
   id: string;
   errors: PaymentFormErrors;
   errorNames: string[];
-  setErrors: Dispatch<SetStateAction<PaymentFormErrors>>;
+}
+
+export interface CalculateProRateProps {
+  accounts: Account[];
+  newPayment: number;
 }
