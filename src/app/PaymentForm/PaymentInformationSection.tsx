@@ -52,7 +52,7 @@ const PaymentInformationSection: FC<PaymentInformationSectionProps> = ({
           type="number"
           id="confirmaccountnumber"
           className={
-            errors.confirmationIsEmpty
+            errors.confirmationIsEmpty || errors.confirmationIsMismatched
               ? "border border-red-500 h-10 px-3"
               : "border h-10 px-3"
           }
