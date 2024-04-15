@@ -10,51 +10,7 @@ import {
 import PaymentInformationSection from "./PaymentInformationSection";
 import PaymentDetailSection from "./PaymentDetailSection";
 import AccountListsSection from "./AccountListsSection";
-
-export const formatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
-
-export const numberFieldKeys = [
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "0",
-  "Backspace",
-  "Tab",
-  ".",
-];
-
-const INITIAL_ACCOUNTS = [
-  {
-    id: "accounta",
-    name: "Account A",
-    balance: 4515600,
-    payment: 0,
-    selected: false,
-  },
-  {
-    id: "accountb",
-    name: "Account B",
-    balance: 1490100,
-    payment: 0,
-    selected: false,
-  },
-  {
-    id: "accountc",
-    name: "Account C",
-    balance: 543800,
-    payment: 0,
-    selected: false,
-  },
-];
+import { INITIAL_ACCOUNTS } from "../lib";
 
 const PaymentForm: FC<PaymentFormProps> = ({ handleSubmit }): ReactElement => {
   const [accounts, setAccounts] = useState<Account[]>(INITIAL_ACCOUNTS);

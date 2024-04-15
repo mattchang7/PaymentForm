@@ -1,6 +1,6 @@
 import { FC, ReactElement } from "react";
-import { numberFieldKeys } from "../PaymentForm/PaymentForm";
 import { PriceInputProps } from "../PaymentForm/PaymentForm.types";
+import { numberFieldKeys } from "../lib";
 
 export const PriceInput: FC<PriceInputProps> = ({
   value,

@@ -2,10 +2,9 @@
 
 import { FC, ReactElement, Fragment } from "react";
 import { AccountsListsSectionProps } from "./PaymentForm.types";
-import { formatter } from "./PaymentForm";
 import { PriceInput } from "../components/inputs";
-import { calculateProRate } from "./PaymentDetailSection";
 import { format } from "path";
+import { formatter, calculateProRate } from "../lib";
 
 const AccountsListsSection: FC<AccountsListsSectionProps> = ({
   errors,

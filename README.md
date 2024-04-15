@@ -45,7 +45,14 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
   - Shouldn't allow more than two decimal places
   - Should show two decimal places and at least one dollar digit no matter what the input
   - Should be empty for any input equal to 0
+- Smart account number input field
+  - Use built in number validation
+  - Will require turning off of the increment arrows and scroll behavior
+  - Don't want to disable copy/paste, but can't stop users from copy/pasting invalid characters. Should check on submit
 - Prorating logic
   - Largest remainder method to avoid rounding errors and ensure the sum of payments is equal to the total payment
   - with Math.round: 40000.33 -> 27578.52, 9100.62, 3321.2
   - Thus requires Math.floor, even though it's not always exactly accurate
+- Input field validation
+  - To minimize invalid inputs,
+  - Some fields have two potential errors

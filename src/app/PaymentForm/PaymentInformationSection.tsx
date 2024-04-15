@@ -1,10 +1,7 @@
 "use client";
 
-import { FC, ReactElement, useState } from "react";
-import {
-  PaymentInformation,
-  PaymentInformationSectionProps,
-} from "./PaymentForm.types";
+import { FC, ReactElement } from "react";
+import { PaymentInformationSectionProps } from "./PaymentForm.types";
 
 const PaymentInformationSection: FC<PaymentInformationSectionProps> = ({
   errors,
