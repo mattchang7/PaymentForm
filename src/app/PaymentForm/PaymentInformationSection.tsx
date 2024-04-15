@@ -39,7 +39,7 @@ const PaymentInformationSection: FC<PaymentInformationSectionProps> = ({
             });
           }}
           onKeyDown={(e) =>
-            numberFieldKeys.includes(e.key) && e.preventDefault()
+            !numberFieldKeys.includes(e.key) && e.preventDefault()
           }
         />
         {errors.accountNumberIsEmpty && (
@@ -71,7 +71,7 @@ const PaymentInformationSection: FC<PaymentInformationSectionProps> = ({
             });
           }}
           onKeyDown={(e) =>
-            numberFieldKeys.includes(e.key) && e.preventDefault()
+            !numberFieldKeys.includes(e.key) && e.preventDefault()
           }
         />
         {errors.confirmationIsEmpty ? (
@@ -105,7 +105,7 @@ const PaymentInformationSection: FC<PaymentInformationSectionProps> = ({
             });
           }}
           onKeyDown={(e) =>
-            numberFieldKeys.includes(e.key) && e.preventDefault()
+            !numberFieldKeys.includes(e.key) && e.preventDefault()
           }
         />
         {errors.routingNumberIsEmpty && (
