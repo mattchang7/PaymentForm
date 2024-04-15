@@ -22,6 +22,7 @@ const PaymentForm: FC<PaymentFormProps> = ({ handleSubmit }): ReactElement => {
       routingNumber: "",
       accountType: undefined,
     });
+  // Using state to track form validation
   const [errors, setErrors] = useState<PaymentFormErrors>({
     accountNumberIsEmpty: false,
     confirmationIsEmpty: false,
@@ -31,6 +32,7 @@ const PaymentForm: FC<PaymentFormProps> = ({ handleSubmit }): ReactElement => {
     noSelectedAccounts: false,
     noTotalPayment: false,
     totalPaymentOverBalance: false,
+    totalPaymentIsNaN: false,
     noaccountaPayment: false,
     accountaPaymentOverBalance: false,
     noaccountbPayment: false,
@@ -42,6 +44,7 @@ const PaymentForm: FC<PaymentFormProps> = ({ handleSubmit }): ReactElement => {
     <form
       className="bg-white flex flex-col h-fit w-full items-center p-10 gap-7 min-w-[400px]"
       onSubmit={(e) => {
+        // The messiest conditional, this checks all controlled inputs and their possible errors, and
         e.preventDefault();
         const newErrors = { ...errors };
 
@@ -72,6 +75,8 @@ const PaymentForm: FC<PaymentFormProps> = ({ handleSubmit }): ReactElement => {
 
         if (totalPayment === "0") {
           newErrors.noTotalPayment = true;
+        } else if (isNaN(+totalPayment)) {
+          newErrors.totalPaymentIsNaN = true;
         } else if (
           +totalPayment * 100 >
           accounts.reduce((sum, a) => sum + a.balance, 0)
@@ -81,7 +86,8 @@ const PaymentForm: FC<PaymentFormProps> = ({ handleSubmit }): ReactElement => {
 
         if (
           accounts.find((a) => a.id === "accounta")!.selected &&
-          +accounts.find((a) => a.id === "accounta")!.payment === 0
+          (+accounts.find((a) => a.id === "accounta")!.payment === 0 ||
+            isNaN(+accounts.find((a) => a.id === "accounta")!.payment))
         ) {
           newErrors.noaccountaPayment = true;
         } else if (
@@ -93,7 +99,8 @@ const PaymentForm: FC<PaymentFormProps> = ({ handleSubmit }): ReactElement => {
 
         if (
           accounts.find((a) => a.id === "accountb")!.selected &&
-          +accounts.find((a) => a.id === "accountb")!.payment === 0
+          (+accounts.find((a) => a.id === "accountb")!.payment === 0 ||
+            isNaN(+accounts.find((a) => a.id === "accountb")!.payment))
         ) {
           newErrors.noaccountbPayment = true;
         } else if (
@@ -105,7 +112,8 @@ const PaymentForm: FC<PaymentFormProps> = ({ handleSubmit }): ReactElement => {
 
         if (
           accounts.find((a) => a.id === "accountc")!.selected &&
-          +accounts.find((a) => a.id === "accountc")!.payment === 0
+          (+accounts.find((a) => a.id === "accountc")!.payment === 0 ||
+            isNaN(+accounts.find((a) => a.id === "accountc")!.payment))
         ) {
           newErrors.noaccountcPayment = true;
         } else if (

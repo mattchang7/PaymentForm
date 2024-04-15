@@ -1,8 +1,12 @@
 import { Account } from "../PaymentForm/PaymentForm.types";
+
+// Calculates prorated payments and returns a new accounts array with updated payment values
+// Uses the largest remainder method, which ensures quotients which add up to the dividend over the most precise rounding
 export const calculateProRate = (
   accounts: Account[],
   newPayment: number
 ): Account[] => {
+  // Only add balances of selected accounts
   const selectedBalances = accounts.reduce(
     (sum, a) => (a.selected ? sum + a.balance : sum),
     0
@@ -14,6 +18,7 @@ export const calculateProRate = (
       payment: "0",
     }));
 
+  // The first distribution divides the payment proportionally, rounded down to the nearest cent
   const initialDistribution = accounts.map((a) =>
     a.selected
       ? {
@@ -28,6 +33,7 @@ export const calculateProRate = (
         }
   );
 
+  // Tracks the remainder, in cents
   let remainingCents = Math.round(
     newPayment * 100 -
       initialDistribution.reduce(
@@ -35,6 +41,8 @@ export const calculateProRate = (
         0
       )
   );
+
+  // Loops through the remaining cents, adding one to each selected account until none remain
   let i = 0;
   while (remainingCents > 0) {
     if (initialDistribution[i % initialDistribution.length].selected) {

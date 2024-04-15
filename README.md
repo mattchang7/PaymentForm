@@ -35,7 +35,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
   - Will require turning off of the increment arrows and scroll behavior
   - Don't want to disable copy/paste, but can't stop users from copy/pasting invalid characters. Should check on submit
 - Prorating logic
-  - Largest remainder method to avoid rounding errors and ensure the sum of payments is equal to the total payment
+  - [Largest remainder method](https://electowiki.org/wiki/Largest_remainder_method) to avoid rounding errors and ensure the sum of payments is equal to the total payment
   - with Math.round: 40000.33 -> 27578.52, 9100.62, 3321.2
   - Thus requires Math.floor, even though it's not always exactly accurate
 - Input field validation

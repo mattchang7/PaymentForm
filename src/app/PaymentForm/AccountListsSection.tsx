@@ -71,6 +71,7 @@ const AccountsListsSection: FC<AccountsListsSectionProps> = ({
                     setErrors({
                       ...errors,
                       totalPaymentOverBalance: false,
+                      totalPaymentIsNaN: false,
                       noaccountaPayment: false,
                       accountaPaymentOverBalance: false,
                       noaccountbPayment: false,

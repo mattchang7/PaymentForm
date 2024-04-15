@@ -15,6 +15,7 @@ export const PriceInput: FC<PriceInputProps> = ({
   errors,
   errorNames,
 }): ReactElement => {
+  // generates Tailwind classname based on the props
   const className = `border h-10 px-3 ${
     alignment === "left" ? "w-full" : "w-2/3"
   } ${alignment !== "left" && "text-end"} ${
@@ -29,8 +30,9 @@ export const PriceInput: FC<PriceInputProps> = ({
       className={className}
       disabled={disabled}
       placeholder="$0.00"
-      value={value === "0" || value === "0.00" ? "" : "$" + value}
+      value={value === "0" || value === "0.00" ? "" : "$" + value} // Correctly formats the input value
       onBlur={(e) => {
+        // Messy conditionals, but this checks for inputs that aren't in complete 0.00 form, and formats them correctly once the user blurs the input field
         if (e.target.value[1] === ".") {
           if (e.target.value[e.target.value.length - 2] === ".")
             setValue(
@@ -71,6 +73,8 @@ export const PriceInput: FC<PriceInputProps> = ({
         }
       }}
       onKeyDown={(e) => {
+        // Another messy conditional, this holds the logic for supressing any keystrokes besides numbers, editing keys, command keys, and one period
+        // Also prevents users from adding more than two decimal places (using selectionStart to track cursor location)
         if (
           e.metaKey ||
           e.key === "Backspace" ||

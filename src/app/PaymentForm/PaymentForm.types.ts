@@ -16,6 +16,7 @@ export interface PaymentFormErrors {
   noSelectedAccounts: boolean;
   noTotalPayment: boolean;
   totalPaymentOverBalance: boolean;
+  totalPaymentIsNaN: boolean;
   noaccountaPayment: boolean;
   accountaPaymentOverBalance: boolean;
   noaccountbPayment: boolean;

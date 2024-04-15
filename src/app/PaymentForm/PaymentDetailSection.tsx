@@ -26,12 +26,17 @@ const PaymentDetailSection: FC<PaymentDetailSectionProps> = ({
           errors={errors}
           disabled={false}
           alignment="left"
-          errorNames={["noTotalPayment", "totalPaymentOverBalance"]}
+          errorNames={[
+            "noTotalPayment",
+            "totalPaymentOverBalance",
+            "totalPaymentIsNaN",
+          ]}
           handleChange={(e) => {
             setErrors({
               ...errors,
               noTotalPayment: false,
               totalPaymentOverBalance: false,
+              totalPaymentIsNaN: false,
               noaccountaPayment: false,
               accountaPaymentOverBalance: false,
               noaccountbPayment: false,
@@ -55,9 +60,11 @@ const PaymentDetailSection: FC<PaymentDetailSectionProps> = ({
         />
         {errors.noTotalPayment ? (
           <p className="text-red-500">Payment required</p>
+        ) : errors.totalPaymentOverBalance ? (
+          <p className="text-red-500">Payment cannot exceed total balance</p>
         ) : (
-          errors.totalPaymentOverBalance && (
-            <p className="text-red-500">Payment cannot exceed total balance</p>
+          errors.totalPaymentIsNaN && (
+            <p className="text-red-500">Payment must be a number</p>
           )
         )}
       </div>

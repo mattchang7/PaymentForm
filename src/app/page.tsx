@@ -4,6 +4,7 @@ import PaymentForm from "./PaymentForm/PaymentForm";
 import { useState } from "react";
 
 export default function Home() {
+  // Using state to track form submission. Probably would put some posting/redirecting logic here if the backend were connected.
   const [submitted, setSubmitted] = useState<boolean>(false);
 
   return (
