@@ -2,6 +2,7 @@
 
 import { FC, ReactElement } from "react";
 import { PaymentInformationSectionProps } from "./PaymentForm.types";
+import { numberFieldKeys } from "../lib";
 
 const PaymentInformationSection: FC<PaymentInformationSectionProps> = ({
   errors,
@@ -19,7 +20,7 @@ const PaymentInformationSection: FC<PaymentInformationSectionProps> = ({
           type="number"
           id="accountnumber"
           className={
-            errors.routingNumberIsEmpty
+            errors.accountNumberIsEmpty
               ? "border border-red-500 h-10 px-3"
               : "border h-10 px-3"
           }
@@ -38,7 +39,7 @@ const PaymentInformationSection: FC<PaymentInformationSectionProps> = ({
             });
           }}
           onKeyDown={(e) =>
-            ["e", "E", "+", "-", "."].includes(e.key) && e.preventDefault()
+            numberFieldKeys.includes(e.key) && e.preventDefault()
           }
         />
         {errors.accountNumberIsEmpty && (
@@ -51,11 +52,11 @@ const PaymentInformationSection: FC<PaymentInformationSectionProps> = ({
           type="number"
           id="confirmaccountnumber"
           className={
-            errors.routingNumberIsEmpty
+            errors.confirmationIsEmpty
               ? "border border-red-500 h-10 px-3"
               : "border h-10 px-3"
           }
-          placeholder="Account Number"
+          placeholder="Confirm Account Number"
           value={paymentInformation.confirmationAccountNumber}
           onWheel={(e) => (e.target as HTMLInputElement).blur()}
           onChange={(e) => {
@@ -70,7 +71,7 @@ const PaymentInformationSection: FC<PaymentInformationSectionProps> = ({
             });
           }}
           onKeyDown={(e) =>
-            ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
+            numberFieldKeys.includes(e.key) && e.preventDefault()
           }
         />
         {errors.confirmationIsEmpty ? (
@@ -104,7 +105,7 @@ const PaymentInformationSection: FC<PaymentInformationSectionProps> = ({
             });
           }}
           onKeyDown={(e) =>
-            ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
+            numberFieldKeys.includes(e.key) && e.preventDefault()
           }
         />
         {errors.routingNumberIsEmpty && (

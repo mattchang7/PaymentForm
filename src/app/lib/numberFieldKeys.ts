@@ -12,4 +12,6 @@ export const numberFieldKeys = [
   "Backspace",
   "Tab",
   ".",
+  "ArrowRight",
+  "ArrowLeft",
 ];
