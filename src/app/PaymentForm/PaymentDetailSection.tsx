@@ -5,6 +5,7 @@ import { PaymentDetailSectionProps } from "./PaymentForm.types";
 import { PriceInput } from "../components/inputs";
 import { calculateProRate } from "../lib";
 
+// Controlled input for payment details
 const PaymentDetailSection: FC<PaymentDetailSectionProps> = ({
   errors,
   setErrors,
@@ -32,6 +33,7 @@ const PaymentDetailSection: FC<PaymentDetailSectionProps> = ({
             "totalPaymentIsNaN",
           ]}
           handleChange={(e) => {
+            // sets all errors for payments to false because individual account payments and total payments are tied together
             setErrors({
               ...errors,
               noTotalPayment: false,

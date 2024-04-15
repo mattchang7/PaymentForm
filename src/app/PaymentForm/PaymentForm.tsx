@@ -44,7 +44,7 @@ const PaymentForm: FC<PaymentFormProps> = ({ handleSubmit }): ReactElement => {
     <form
       className="bg-white flex flex-col h-fit w-full items-center p-10 gap-7 min-w-[400px]"
       onSubmit={(e) => {
-        // The messiest conditional, this checks all controlled inputs and their possible errors, and
+        // The messiest conditional, this checks all controlled inputs and their possible errors on submit, and sets the error state accordingly
         e.preventDefault();
         const newErrors = { ...errors };
 

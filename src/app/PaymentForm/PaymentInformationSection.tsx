@@ -4,6 +4,7 @@ import { FC, ReactElement } from "react";
 import { PaymentInformationSectionProps } from "./PaymentForm.types";
 import { numberFieldKeys } from "../lib";
 
+// Controlled inputs for all payment information
 const PaymentInformationSection: FC<PaymentInformationSectionProps> = ({
   errors,
   setErrors,

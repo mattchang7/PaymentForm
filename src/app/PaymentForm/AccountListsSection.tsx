@@ -9,6 +9,7 @@ import { PriceInput } from "../components/inputs";
 import { format } from "path";
 import { formatter, calculateProRate } from "../lib";
 
+// Mapped list of accounts with their payment inputs
 const AccountsListsSection: FC<AccountsListsSectionProps> = ({
   errors,
   setErrors,
